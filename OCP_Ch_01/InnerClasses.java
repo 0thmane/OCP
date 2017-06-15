@@ -5,6 +5,9 @@ public class InnerClasses {
 	public static void main(String[] args) {
 		System.out.println("Running InnerClasses...\n");
 		
+		/* ============================================== */
+		// Playing with Vault
+
 		Vault vault = new Vault();
 
 		Object secretClass = vault.getSecretClass("hi");
@@ -15,6 +18,14 @@ public class InnerClasses {
 		System.out.println("Secret class hash: " + secretClass.hashCode());
 
 		Object sc = vault.getSecretClass("hi");
+
+		/* ============================================== */
+		// Playing with Rand
+
+		Rand rand = new Rand();
+		Rand.A a = rand.new A();
+
+		a.getInts();
 	}
 }
 
@@ -36,6 +47,7 @@ class Vault {
 		}
 	}
 
+	/* Static nested class */
 	public static class AccessValidator {
 		private AccessValidator() {}
 
@@ -48,6 +60,7 @@ class Vault {
 		}
 	}
 
+	/* Member inner class */
 	private class SecretClass implements Secret {
 		@Override
 		public String toString() {
@@ -61,4 +74,23 @@ class Vault {
 	}
 
 	private interface Secret {}
+}
+
+class Rand {
+	private int a = 0;
+
+	public class A {
+		private int a = 1;
+
+		public void getInts() {
+			System.out.println(Rand.this.a);
+			System.out.println(this.a);
+		}
+
+		public void methodClass() {
+
+			/* Inner Class */
+			class MethodClass{}
+		}
+	}
 }

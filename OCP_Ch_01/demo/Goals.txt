@@ -16,3 +16,4 @@ Ideas
 		- Randomly generate fleet
 		- Randomly scramble bogie
 		- Calculate scramble time
+	- Nested class bank
