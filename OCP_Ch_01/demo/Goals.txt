@@ -1,0 +1,18 @@
+OCP Chapter 1 
+
+Things covered
+	- Inheritance
+	- Overriding
+		- Use new @Override syntax
+	- Overloading
+	- instanceof 
+	- toString()
+	- equals() also requires you override the hashCode() 
+	- Enums
+	- Nested classes
+
+Ideas
+	- Airforce
+		- Randomly generate fleet
+		- Randomly scramble bogie
+		- Calculate scramble time
