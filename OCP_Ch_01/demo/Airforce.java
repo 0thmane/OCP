@@ -13,7 +13,7 @@ public class Airforce {
 		}
 
 		this.COUNTRY_CODE = countryCode;
-		this.aircraftList = AirforceGenerator.createAircraft(countryCode, aircraftLimit);
+		this.aircraftList = createAircraft(countryCode, aircraftLimit);
 	}
 
 	public boolean addAircraft(Aircraft newAircraft) {
@@ -49,9 +49,13 @@ public class Airforce {
 		boolean exists = false;
 
 		for (Aircraft aircraft : this.aircraftList) {
-			String aircraftFullId = aircraft.getFullId();
+			String existingAircraftId = aircraft.getFullId();
 
-			if (aircraftFullId.equals(fullAircraftId)) {
+			if (existingAircraftId.equals(fullAircraftId)) {
+
+				System.out.println("Existing aircraft: " + existingAircraftId);
+				System.out.println("New aircraft: " + fullAircraftId);
+
 				exists = true;
 				break;
 			}
@@ -74,20 +78,33 @@ public class Airforce {
 		int scrambleTime = 0;
 
 		int randomInt1 = random.nextInt(this.aircraftList.size());
-		int randomInt2 = random.nextInt(this.aircraftList.size());
+		int randomInt2;
+
+		// Insure second random number is unique
+		while (true) {
+			randomInt2 = random.nextInt(this.aircraftList.size());
+
+			if (randomInt2 != randomInt1) {
+				break;
+			}
+		}
 
 		Aircraft randomAircraft1 = this.aircraftList.get(randomInt1);
 		Aircraft randomAircraft2 = this.aircraftList.get(randomInt2);
 
-		scrambledAircraft.add(randomAircraft1);
-		scrambledAircraft.add(randomAircraft2);
-
 		int scrambleTime1 = randomAircraft1.scramble();
 		int scrambleTime2 = randomAircraft2.scramble();
+
+		scrambledAircraft.add(randomAircraft1);
+		scrambledAircraft.add(randomAircraft2);
 
 		scrambleTime = Math.max(scrambleTime1, scrambleTime2);
 
 		scrambleDetails = new Touple(scrambledAircraft, scrambleTime);
+
+		System.out.println("\nAircraft scrambled:\n");
+		System.out.println("\t" + randomAircraft1);
+		System.out.println("\t" + randomAircraft2);
 
 		return scrambleDetails;
 	}
@@ -103,12 +120,25 @@ public class Airforce {
 		return strRepresentation;
 	}
 
-	private static class AirforceGenerator {
-		// TODO
-		public static List<Aircraft> createAircraft(String countryCode, int aircraftLimit) {
-			List<Aircraft> newAirforce = new ArrayList<>();
+	private  List<Aircraft> createAircraft(String countryCode, int aircraftLimit) {
+		List<Aircraft> newAirforce = new ArrayList<>();
 
-			return newAirforce;
+		return newAirforce;
+	}
+
+	public class Touple {
+		private final List<Aircraft> scrambledAircraft;
+		public final int scrambleTime;
+
+		public Touple(List<Aircraft> scrambledAircraft, int scrambleTime) {
+			this.scrambledAircraft = scrambledAircraft;
+			this.scrambleTime = scrambleTime;
+		}
+
+		public List<Aircraft> getScrambledAircraft() {
+			List<Aircraft> safeList = new ArrayList<>(scrambledAircraft);
+
+			return safeList;
 		}
 	}
 }

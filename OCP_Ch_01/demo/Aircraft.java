@@ -12,18 +12,19 @@ public class Aircraft {
 
 	private int currentFuel = 0;
 
-	public Aircraft(AircraftType aircraftType, int aircraftId) {
-		this(aircraftType, aircraftId, 0);
+	public Aircraft(AircraftType aircraftType,  String ownerNation, int aircraftId) {
+		this(aircraftType, ownerNation, aircraftId, 0);
 	}
 
-	public Aircraft(AircraftType aircraftType, int aircraftId, int currentFuel) {
+	public Aircraft(AircraftType aircraftType, String ownerNation, int aircraftId, int currentFuel) {
 		this.TYPE = aircraftType.name();
+
+		this.ID = aircraftId;
+		this.ownerNation = ownerNation;
 
 		this.FUEL_CAPACITY = aircraftType.FUEL_CAPACITY;
 		this.FUEL_RATE = aircraftType.FUEL_RATE;
 		this.MIN_TAKEOFF_TIME = aircraftType.MIN_TAKEOFF_TIME;
-
-		this.ID = aircraftId;
 
 		this.currentFuel = currentFuel;
 	}
@@ -38,6 +39,8 @@ public class Aircraft {
 		int fuelingTime = 0;
 		int requiredFuel = this.FUEL_CAPACITY - this.currentFuel;
 
+		this.currentFuel += requiredFuel;
+
 		fuelingTime = Math.round(requiredFuel / this.FUEL_RATE);
 
 		return fuelingTime;
@@ -48,7 +51,7 @@ public class Aircraft {
 	}
 
 	public String getFullId() {
-		String strId = "";
+		String strId = this.TYPE;
 
 		if (this.ID < 10) {
 			strId +="000" + this.ID;
@@ -71,7 +74,7 @@ public class Aircraft {
 		String strId = this.getFullId();
 
 		strRepresentation += "Type: " + this.TYPE;
-		strRepresentation += "\tID: " + this.TYPE + strId;
+		strRepresentation += "\tID: " + strId;
 		strRepresentation += "\t\tFUEL: " + this.currentFuel + " / " + this.FUEL_CAPACITY + "kg";
 
 		return strRepresentation;
