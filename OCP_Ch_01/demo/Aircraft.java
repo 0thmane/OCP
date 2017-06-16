@@ -4,6 +4,8 @@ public class Aircraft {
 	public final String TYPE;
 	public final int ID;
 
+	public String ownerNation;
+
 	public final int FUEL_CAPACITY;
 	public final int FUEL_RATE;
 	public final int MIN_TAKEOFF_TIME;
@@ -45,9 +47,7 @@ public class Aircraft {
 		return this.currentFuel == this.FUEL_CAPACITY;
 	}
 
-	@Override
-	public String toString() {
-		String strRepresentation = "";
+	public String getFullId() {
 		String strId = "";
 
 		if (this.ID < 10) {
@@ -59,6 +59,16 @@ public class Aircraft {
 		} else {
 			strId += this.ID;
 		}
+
+		strId += this.ownerNation;
+
+		return strId;
+	}
+
+	@Override
+	public String toString() {
+		String strRepresentation = "";
+		String strId = this.getFullId();
 
 		strRepresentation += "Type: " + this.TYPE;
 		strRepresentation += "\tID: " + this.TYPE + strId;
