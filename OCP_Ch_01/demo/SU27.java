@@ -1,1 +1,0 @@
-public class SU27 extends Aircraft {}

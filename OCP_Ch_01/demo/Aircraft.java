@@ -1,14 +1,30 @@
 import java.lang.Math;
 
-public abstract class Aircraft {
-	public static final String TYPE = "";
-	public static final String ID = "";
+public class Aircraft {
+	public final String TYPE;
+	public final int ID;
 
-	public static final int FUEL_CAPACITY = 0;
-	public static final int FUEL_RATE = 0;
-	public static final int MIN_TAKEOFF_TIME = 0;
+	public final int FUEL_CAPACITY;
+	public final int FUEL_RATE;
+	public final int MIN_TAKEOFF_TIME;
 
-	public int currentFuel = 0;
+	private int currentFuel = 0;
+
+	public Aircraft(AircraftType aircraftType, int aircraftId) {
+		this(aircraftType, aircraftId, 0);
+	}
+
+	public Aircraft(AircraftType aircraftType, int aircraftId, int currentFuel) {
+		this.TYPE = aircraftType.name();
+
+		this.FUEL_CAPACITY = aircraftType.FUEL_CAPACITY;
+		this.FUEL_RATE = aircraftType.FUEL_RATE;
+		this.MIN_TAKEOFF_TIME = aircraftType.MIN_TAKEOFF_TIME;
+
+		this.ID = aircraftId;
+
+		this.currentFuel = currentFuel;
+	}
 
 	public int getFuel() {
 		return this.currentFuel;
@@ -29,20 +45,50 @@ public abstract class Aircraft {
 		return this.currentFuel == this.FUEL_CAPACITY;
 	}
 
+	@Override
 	public String toString() {
 		String strRepresentation = "";
+		String strId = "";
+
+		if (this.ID < 10) {
+			strId +="000" + this.ID;
+		} else if (this.ID < 100) {
+			strId += "00" + this.ID;
+		} else if (this.ID < 1000) {
+			strId += "0" + this.ID;
+		} else {
+			strId += this.ID;
+		}
 
 		strRepresentation += "Type: " + this.TYPE;
-		strRepresentation += " ID: " + this.ID;
-		strRepresentation += " FUEL: " + this.currentFuel + " / " + this.FUEL_CAPACITY;
+		strRepresentation += "\tID: " + this.TYPE + strId;
+		strRepresentation += "\t\tFUEL: " + this.currentFuel + " / " + this.FUEL_CAPACITY + "kg";
 
 		return strRepresentation;
 	}
 
-	public String toHash() {
-		String strHash = "";
+	@Override
+	public int hashCode() {
+		int newHash = 0;
 
-		return strHash;
+		newHash += this.TYPE.hashCode();
+		newHash += this.ID;
+		newHash *= 7;
+		newHash <<= 2;
+
+		return newHash;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (! (obj instanceof Aircraft)) return false;
+
+		Aircraft subjectAircraft = (Aircraft) obj;
+
+		int otherHash = subjectAircraft.hashCode();
+		int thisHash = this.hashCode();
+
+		return thisHash == otherHash;
 	}
 
 	public int scramble() {

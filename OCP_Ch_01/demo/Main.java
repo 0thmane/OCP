@@ -1,7 +1,9 @@
 public class Main {
 	public static void main(String[] args) {
-		F16 f16 = new F16();
+		Aircraft planeOne = new Aircraft(AircraftType.F16, 1);
+		Aircraft planeTwo = new Aircraft(AircraftType.FA18, 1);
 
-		System.out.println(f16);
+		System.out.println(planeOne);
+		System.out.println(planeTwo);
 	}
 }
