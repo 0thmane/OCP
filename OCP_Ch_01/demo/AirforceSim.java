@@ -34,9 +34,34 @@ public class AirforceSim {
 		airforce.scrambleAircraft();
 	}
 
+	public static void extraDemo() {
+		System.out.println("\n============================================\nExtra Demo:");
+		System.out.println("\nHash equals:");
+
+		Aircraft aircraftOne = new Aircraft(AircraftType.F16, "CA", 1, 250);
+		Aircraft aircraftTwo = new Aircraft(AircraftType.F16, "CA", 1, 250);
+
+		System.out.println(aircraftOne);
+		System.out.println(aircraftTwo);
+		System.out.println("Aircraft 1 equals Aircraft 2? " + aircraftOne.equals(aircraftTwo));
+
+		System.out.println("\nHash equals:");
+
+		Aircraft aircraftThree = new Aircraft(AircraftType.F16, "CA", 1, 250);
+		Aircraft aircraftFour = new Aircraft(AircraftType.F16, "CA", 2, 250);
+
+		System.out.println(aircraftThree);
+		System.out.println(aircraftFour);
+		System.out.println("Aircraft 1 equals Aircraft 2? " + aircraftThree.equals(aircraftFour));
+
+		System.out.println("\n");
+	}
+
 	public static void main(String[] args) {
 		generateBogey();
 		Airforce canadianAirforce = generateAirforce("CA", 10);
 		scrambleTest(canadianAirforce);
+
+		extraDemo();
 	}
 }

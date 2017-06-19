@@ -52,10 +52,23 @@ public class Airforce {
 			String existingAircraftId = aircraft.getFullId();
 
 			if (existingAircraftId.equals(fullAircraftId)) {
-				/*
-				System.out.println("Existing aircraft: " + existingAircraftId);
-				System.out.println("New aircraft: " + fullAircraftId);
-				*/
+				exists = true;
+				break;
+			}
+		}
+
+		return exists;
+	}
+
+	public boolean aircraftExists(Aircraft newAircraft) {
+		boolean exists = false;
+
+		if (newAircraft == null) {
+			return exists;
+		}
+
+		for (Aircraft aircraft : this.aircraftList) {
+			if (aircraft.equals(newAircraft)) {
 				exists = true;
 				break;
 			}
