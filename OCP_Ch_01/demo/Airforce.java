@@ -5,7 +5,7 @@ public class Airforce {
 
 	public final String COUNTRY_CODE;
 
-	private List<Aircraft> aircraftList;
+	private List<Aircraft> aircraftList = new ArrayList<>();
 
 	public Airforce(String countryCode, int aircraftLimit) throws InvalidCountryCodeException {
 		if (countryCode.length() > 2) {
@@ -13,7 +13,7 @@ public class Airforce {
 		}
 
 		this.COUNTRY_CODE = countryCode;
-		this.aircraftList = createAircraft(countryCode, aircraftLimit);
+		this.createAircraft(countryCode, aircraftLimit);
 	}
 
 	public boolean addAircraft(Aircraft newAircraft) {
@@ -52,10 +52,10 @@ public class Airforce {
 			String existingAircraftId = aircraft.getFullId();
 
 			if (existingAircraftId.equals(fullAircraftId)) {
-
+				/*
 				System.out.println("Existing aircraft: " + existingAircraftId);
 				System.out.println("New aircraft: " + fullAircraftId);
-
+				*/
 				exists = true;
 				break;
 			}
@@ -106,6 +106,8 @@ public class Airforce {
 		System.out.println("\t" + randomAircraft1);
 		System.out.println("\t" + randomAircraft2);
 
+		System.out.println("\nTime to scramble:\t" + scrambleTime + " minutes.\n");
+
 		return scrambleDetails;
 	}
 
@@ -120,10 +122,21 @@ public class Airforce {
 		return strRepresentation;
 	}
 
-	private  List<Aircraft> createAircraft(String countryCode, int aircraftLimit) {
-		List<Aircraft> newAirforce = new ArrayList<>();
+	private  void createAircraft(String countryCode, int aircraftLimit) {
+		EnumSet<AircraftType> aircraftTypes = EnumSet.allOf(AircraftType.class);
+		Random random = new Random();
 
-		return newAirforce;
+		while (this.aircraftList.size() < aircraftLimit) {
+
+			int randAircraftType = random.nextInt(aircraftTypes.size());
+			int randAircraftId = random.nextInt(10000);
+
+			Aircraft newAircraft = new Aircraft(AircraftType.values()[randAircraftType] ,
+												countryCode,
+												randAircraftId);
+
+			this.addAircraft(newAircraft);
+		}
 	}
 
 	public class Touple {
