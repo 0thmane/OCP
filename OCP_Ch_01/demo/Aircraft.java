@@ -1,4 +1,5 @@
 import java.lang.Math;
+import java.util.*;
 
 public class Aircraft {
 	public final String TYPE;
@@ -11,6 +12,10 @@ public class Aircraft {
 	public final int MIN_TAKEOFF_TIME;
 
 	private int currentFuel = 0;
+
+	public Aircraft(AircraftType aircraftType,  String ownerNation) {
+		this(aircraftType, ownerNation, new Random().nextInt(1000), 0);
+	}
 
 	public Aircraft(AircraftType aircraftType,  String ownerNation, int aircraftId) {
 		this(aircraftType, ownerNation, aircraftId, 0);
@@ -83,10 +88,9 @@ public class Aircraft {
 	@Override
 	public int hashCode() {
 		int newHash = 0;
+		String strRep = this.TYPE + this.ID + this.ownerNation;
 
-		newHash += this.TYPE.hashCode();
-		newHash += this.ID;
-		newHash *= 7;
+		newHash += strRep.hashCode();
 		newHash <<= 2;
 
 		return newHash;

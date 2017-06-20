@@ -1,16 +1,8 @@
-import java.util.*;
-
 public class AirforceSim {
 	public static void generateBogey() {
-		EnumSet<AircraftType> aircraftTypes = EnumSet.allOf(AircraftType.class);
-		Random random = new Random();
+		AircraftType randomAircraftType = AircraftType.getRandomAircraftType();
 
-		int randAircraftType = random.nextInt(aircraftTypes.size());
-		int randAircraftId = random.nextInt(10000);
-
-		Aircraft bogey = new Aircraft(AircraftType.values()[randAircraftType] ,
-												"XX",
-												randAircraftId);
+		Aircraft bogey = new Aircraft(randomAircraftType, "XX");
 
 		bogey.addFuel();
 
@@ -18,7 +10,7 @@ public class AirforceSim {
 		System.out.println(bogey + "\n");
 	}
 
-	public static Airforce generateAirforce(String countryCode, int aircraftLimit) {
+	public static Airforce generateSampleAirforce(String countryCode, int aircraftLimit) {
 		try {
 			Airforce newAirforce = new Airforce(countryCode, aircraftLimit);
 
@@ -28,10 +20,6 @@ public class AirforceSim {
 
 			return null;
 		}
-	}
-
-	public static void scrambleTest(Airforce airforce) {
-		airforce.scrambleAircraft();
 	}
 
 	public static void extraDemo() {
@@ -47,8 +35,20 @@ public class AirforceSim {
 
 		System.out.println("\nHash equals:");
 
+		// -----------------------------------------------------------------------------
+
 		Aircraft aircraftThree = new Aircraft(AircraftType.F16, "CA", 1, 250);
 		Aircraft aircraftFour = new Aircraft(AircraftType.F16, "CA", 2, 250);
+
+		System.out.println(aircraftThree);
+		System.out.println(aircraftFour);
+		System.out.println("Aircraft 1 equals Aircraft 2? " + aircraftThree.equals(aircraftFour));
+
+		System.out.println("\n");
+
+		// -----------------------------------------------------------------------------
+		aircraftThree = new Aircraft(AircraftType.F16, "CA", 1, 250);
+		aircraftFour = new Aircraft(AircraftType.F16, "US", 1, 250);
 
 		System.out.println(aircraftThree);
 		System.out.println(aircraftFour);
@@ -59,8 +59,8 @@ public class AirforceSim {
 
 	public static void main(String[] args) {
 		generateBogey();
-		Airforce canadianAirforce = generateAirforce("CA", 10);
-		scrambleTest(canadianAirforce);
+		Airforce canadianAirforce = generateSampleAirforce("CA", 10);
+		canadianAirforce.scrambleAircraft();
 
 		extraDemo();
 	}

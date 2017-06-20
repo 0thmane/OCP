@@ -1,3 +1,5 @@
+import java.util.*;
+
 public enum AircraftType {
 	F16(3175, 1250, 4), 
 	F35(8380, 950, 5), 
@@ -16,5 +18,15 @@ public enum AircraftType {
 		this.FUEL_CAPACITY = fuelCapacity;
 		this.FUEL_RATE = fuelRate;
 		this.MIN_TAKEOFF_TIME = scrambleTime;
+	}
+
+	public static AircraftType getRandomAircraftType() {
+		Random random = new Random();
+
+		AircraftType[] aircraftTypes = AircraftType.values();
+		int numOfAircraftTypes = aircraftTypes.length;
+		int randomNumber = random.nextInt(numOfAircraftTypes);
+
+		return aircraftTypes[randomNumber];
 	}
 }

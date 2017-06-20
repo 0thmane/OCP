@@ -13,7 +13,7 @@ public class Airforce {
 		}
 
 		this.COUNTRY_CODE = countryCode;
-		this.createAircraft(countryCode, aircraftLimit);
+		this.createAndAddAircraft(aircraftLimit);
 	}
 
 	public boolean addAircraft(Aircraft newAircraft) {
@@ -30,7 +30,6 @@ public class Airforce {
 	public boolean removeAircraft(String fullAircraftId) {
 		boolean removalSuccess = false;
 		Iterator aircraftParser = this.aircraftList.iterator();
-
 
 		while (aircraftParser.hasNext()) {
 			Aircraft currentAircraft = (Aircraft) aircraftParser.next();
@@ -134,18 +133,12 @@ public class Airforce {
 		return strRepresentation;
 	}
 
-	private void createAircraft(String countryCode, int aircraftLimit) {
-		EnumSet<AircraftType> aircraftTypes = EnumSet.allOf(AircraftType.class);
-		Random random = new Random();
-
+	private void createAndAddAircraft(int aircraftLimit) {
 		while (this.aircraftList.size() < aircraftLimit) {
 
-			int randAircraftType = random.nextInt(aircraftTypes.size());
-			int randAircraftId = random.nextInt(10000);
+			AircraftType randomAircraftType = AircraftType.getRandomAircraftType();
 
-			Aircraft newAircraft = new Aircraft(AircraftType.values()[randAircraftType] ,
-												countryCode,
-												randAircraftId);
+			Aircraft newAircraft = new Aircraft(randomAircraftType, this.COUNTRY_CODE);
 
 			this.addAircraft(newAircraft);
 		}
