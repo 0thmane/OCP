@@ -5,6 +5,11 @@ interface TraitChecker {
 	public boolean test(Aircraft aircraft);
 }
 
+@FunctionalInterface
+interface FlyingAircraft {
+	public Aircraft test(Aircraft aircraft);
+}
+
 class Aircraft {
 	private boolean canFly;
 	private boolean canLand;
@@ -67,6 +72,14 @@ public class Lambdas {
 
 		// -------------------------------------------------------------------------
 
+		ArrayList<Aircraft> flyingAircraft = new ArrayList<>();
 
+		aircraftList.stream().forEach(a -> { 
+			if(a.canFly()) {
+				flyingAircraft.add(a);
+			}
+		});
+
+		System.out.println(flyingAircraft);
 	}
 }
