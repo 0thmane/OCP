@@ -48,6 +48,16 @@ public class Lambdas {
 		}
 	}
 
+	private static ArrayList<Aircraft> findMatchingAircraft(ArrayList<Aircraft> aircraftList, TraitChecker trait) {
+		ArrayList<Aircraft> matchingAircraft = new ArrayList<>();
+
+		for (Aircraft aircraft : aircraftList) {
+			if (trait.test(aircraft)) {
+				matchingAircraft.add(aircraft);
+			}
+		}
+	}
+
 	public static void main(String... args) {
 		Aircraft aircraft1 = new Aircraft(false, false);
 		Aircraft aircraft2 = new Aircraft(true, false);
@@ -81,5 +91,11 @@ public class Lambdas {
 		});
 
 		System.out.println(flyingAircraft);
+
+		// -------------------------------------------------------------------------
+
+		flyingAircraft.clear();
+
+		findMatchingAircraft(aircraftList, a -> a.canFly());
 	}
 }
