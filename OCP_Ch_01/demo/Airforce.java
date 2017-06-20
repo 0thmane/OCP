@@ -19,9 +19,8 @@ public class Airforce {
 	public boolean addAircraft(Aircraft newAircraft) {
 		boolean insertSuccess = false;
 
-		if (aircraftExists(newAircraft.getFullId())) {
-			insertSuccess = false;
-		} else {
+		if (!aircraftExists(newAircraft.getFullId())) {
+			insertSuccess = true;
 			aircraftList.add(newAircraft);
 		}
 
@@ -135,7 +134,7 @@ public class Airforce {
 		return strRepresentation;
 	}
 
-	private  void createAircraft(String countryCode, int aircraftLimit) {
+	private void createAircraft(String countryCode, int aircraftLimit) {
 		EnumSet<AircraftType> aircraftTypes = EnumSet.allOf(AircraftType.class);
 		Random random = new Random();
 
