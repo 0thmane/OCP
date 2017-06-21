@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.function.Predicate;
 
 @FunctionalInterface
 interface TraitChecker {
@@ -40,6 +41,13 @@ public class Lambdas {
 		}
 	}
 
+	// Same as above, but using the Predicate function
+	private static void printDesired2(Aircraft aircraft, Predicate<Aircraft> trait) {
+		if (trait.test(aircraft)) {
+			System.out.println(aircraft);
+		}
+	}
+
 	private static void printDesired(ArrayList<Aircraft> aircraftList, TraitChecker trait) {
 		for (Aircraft aircraft : aircraftList) {
 			if (trait.test(aircraft)) {
@@ -48,12 +56,10 @@ public class Lambdas {
 		}
 	}
 
-	private static ArrayList<Aircraft> findMatchingAircraft(ArrayList<Aircraft> aircraftList, TraitChecker trait) {
-		ArrayList<Aircraft> matchingAircraft = new ArrayList<>();
-
+	private static void findMatchingAircraft(ArrayList<Aircraft> aircraftList, ArrayList<Aircraft> aircraftOutputList, TraitChecker trait) {
 		for (Aircraft aircraft : aircraftList) {
 			if (trait.test(aircraft)) {
-				matchingAircraft.add(aircraft);
+				aircraftOutputList.add(aircraft);
 			}
 		}
 	}
@@ -84,7 +90,7 @@ public class Lambdas {
 
 		ArrayList<Aircraft> flyingAircraft = new ArrayList<>();
 
-		aircraftList.stream().forEach(a -> { 
+		aircraftList.stream().forEach(a -> {
 			if(a.canFly()) {
 				flyingAircraft.add(a);
 			}
@@ -96,6 +102,12 @@ public class Lambdas {
 
 		flyingAircraft.clear();
 
-		findMatchingAircraft(aircraftList, a -> a.canFly());
+		findMatchingAircraft(aircraftList, flyingAircraft , a -> a.canFly());
+
+		System.out.println(flyingAircraft);
+
+		// -------------------------------------------------------------------------
+
+		
 	}
 }
