@@ -1,3 +1,5 @@
 public class Spaceship extends Ship {
-	private int oxygenAmount = 	
+	private String name;
+	private int oxygenAmount;
+
 }
