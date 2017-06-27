@@ -1,0 +1,9 @@
+OCP Chapter 3
+
+Things Covered
+	- Lists/Arrays
+	- Generics
+	- 
+
+Ideas
+	- Update demo from chapter 2?
