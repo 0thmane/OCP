@@ -3,7 +3,10 @@ OCP Chapter 3
 Things Covered
 	- Lists/Arrays
 	- Generics
+	- Collections
+	- Maps
 	- 
 
 Ideas
 	- Update demo from chapter 2?
+	- Use Lambdas
