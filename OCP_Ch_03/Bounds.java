@@ -32,7 +32,6 @@ public class Bounds {
 
 		// ----------------------------------------------------------------------------------------
 
-
 	}
 
 	private static void printList(List<?> list) {
