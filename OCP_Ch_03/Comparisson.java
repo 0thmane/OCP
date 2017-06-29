@@ -21,6 +21,20 @@ class Duck implements Comparable<Duck> {
 	public int getWeight() {
 		return this.weight;
 	}
+
+	public String getName() {
+		return this.name;
+	}
+}
+
+class DuckHelper {
+	public static int compareByWeight(Duck d1, Duck d2) {
+		return d1.getWeight() - d2.getWeight();
+	}
+
+	public static int compareByName(Duck d1, Duck d2) {
+		return d1.getName().compareTo(d2.getName());
+	}
 }
 
 public class Comparisson {
@@ -46,6 +60,9 @@ public class Comparisson {
 
 		// ----------------------------------------------------------------------------------------
 
-		
+		Comparator<Duck> byName = DuckHelper::compareByName;
+		Collections.sort(ducks, byName);
+
+		System.out.println("\nDucks sorted by name: " + ducks);
 	}
 }
