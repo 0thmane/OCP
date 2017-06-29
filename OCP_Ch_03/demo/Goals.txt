@@ -1,11 +1,40 @@
+OCP Chapter 2 & 3
+
+---------------------------------------------------------------------------------------------------
+
+OCP Chapter 2
+
+Things Covered
+	- Lambdas
+		- 
+	- Builder Pattern
+	- Singletons
+	- Polymorphism
+	- instanceof
+	- Factory Pattern
+	- Encapsulation
+	- Immutable classes
+	
+Ideas
+	- Spaceship
+		- Singleton oxygen manager
+	- Gamify to repair subsystems to survive the longest time?
+
+---------------------------------------------------------------------------------------------------
+
 OCP Chapter 3
 
 Things Covered
 	- Lists/Arrays
 	- Generics
 	- Collections
+		- compareTo
+		- Maps
 	- Maps
-	- 
+	- Java 8 new stuff
+		- Lambda loop through Collection
+		- removeIf
+		- ::  method references
 
 Ideas
 	- Update demo from chapter 2?
