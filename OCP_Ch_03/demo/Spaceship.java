@@ -1,26 +1,6 @@
-/*
-	TODO:
-		1. Create Class
-		2. Create unique variables
-			- Type (ENUM)
-			- Name
-			- ID number
-		3. Create dynamic variables
-			- Location
-			- Fuel
-		4. Encapsulation methods for all variables
-		5. Implement compareTo
-		6. Implement comparators based on 
-			- Location
-			- Capacity
-			- Fuel
-		7. Implements equals() & hashCode()
-		8. Implement toString()
-*/
-
 import java.util.*;
 
-public class Spaceship {
+public class Spaceship implements Comparable<Spaceship> {
 	public final SpaceshipType TYPE;
 	public final int CREW_CAPACITY;
 	public final int ID;
@@ -77,5 +57,41 @@ public class Spaceship {
 		}
 		
 		this.location = location;
+	}
+
+	public int compareTo(Spaceship spaceship) {
+		return this.hashCode() - spaceship.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		String strRepresentation = "";
+
+		strRepresentation += "Ship type: " + this.TYPE;
+		strRepresentation += " Name: " + this.name;
+		strRepresentation += " Location: " + getLocation();
+		strRepresentation += " Capacity: " + this.CREW_CAPACITY;
+
+		return strRepresentation;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (! (obj instanceof Spaceship)) return false;
+	
+		Spaceship spaceship = (Spaceship) obj;
+
+		int thisHash = this.hashCode();
+		int otherHash = spaceship.hashCode();
+
+		return thisHash == otherHash;
+	}
+
+	@Override
+	public int hashCode() {
+		int hashCode = 0;
+		String strRepresentation = this.ID + this.name + this.location;
+
+		return strRepresentation.hashCode();
 	}
 }
