@@ -18,7 +18,7 @@ public enum LocationType {
 	IN_TRANSIT("In transit"),
 	CLASSIFIED("Classified");
 
-	private Random random = new Random();
+	private static Random random = new Random();
 
 	public String location;
 
@@ -26,7 +26,7 @@ public enum LocationType {
 		this.location = location;
 	}
 
-	public LocationType getRandomType() {
+	public static LocationType getRandomType() {
 		LocationType[] locationTypes = LocationType.values();
 		int numLocations = locationTypes.length;
 

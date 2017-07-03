@@ -7,26 +7,27 @@
 import java.util.*;
 
 public enum SpaceshipType {
-	SHUTTLE(0, 0),
-	LIGHT_CARGO(0, 0),
-	HEAVY_CARGO(0, 0),
-	DESTROYER(0, 0),
-	CRUISER(0, 0),
-	MARINE_LANDER(0, 0),
-	CORVETTE(0, 0);
+	// (fuelLimit, crewLimit)
+	SHUTTLE(50, 5),
+	LIGHT_CARGO(250, 45),
+	HEAVY_CARGO(1250, 100),
+	DESTROYER(4000, 500),
+	CRUISER(2500, 250),
+	MARINE_LANDER(7000, 175),
+	CORVETTE(1750, 100);
 
 	public final int FUEL_LIMIT;
 	public final int CREW_LIMIT;
 
-	private Random random = new Random();
+	private static Random random = new Random();
 
 	private SpaceshipType(int fuelLimit, int crewLimit) {
 		this.FUEL_LIMIT = fuelLimit;
 		this.CREW_LIMIT = crewLimit;
 	}
 
-	public SpaceshipType getRandomType() {
-		LocationType[] spaceshipTypes = LocationType.values();
+	public static SpaceshipType getRandomType() {
+		SpaceshipType[] spaceshipTypes = SpaceshipType.values();
 		int numTypes = spaceshipTypes.length;
 
 		int randomShip = random.nextInt(numTypes);
