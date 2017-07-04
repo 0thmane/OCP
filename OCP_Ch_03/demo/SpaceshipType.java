@@ -25,13 +25,4 @@ public enum SpaceshipType {
 		this.FUEL_LIMIT = fuelLimit;
 		this.CREW_LIMIT = crewLimit;
 	}
-
-	public static SpaceshipType getRandomType() {
-		SpaceshipType[] spaceshipTypes = SpaceshipType.values();
-		int numTypes = spaceshipTypes.length;
-
-		int randomShip = random.nextInt(numTypes);
-
-		return spaceshipTypes[randomShip];
-	}
 }

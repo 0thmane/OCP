@@ -20,6 +20,11 @@
 
 public class Main {
 	public static void main(String[] args) {
-		EnumController.getRandomEnum(LocationType);
+		MCRN marsNave = new MCRNBuilder()
+			.setFleetAdmiral("Adm Dantes")
+			.setFleetCommander("Cmd Mark Twain")
+			.setCivilianCommander("Jules Verne")
+			.setShipLimit(1000)
+			.build();
 	}
 }

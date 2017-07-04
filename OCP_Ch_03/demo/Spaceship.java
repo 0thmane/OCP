@@ -10,17 +10,14 @@ public class Spaceship implements Comparable<Spaceship> {
 	private int fuel;
 	private LocationType location;
 
-	private Random random = new Random();
-
-	// TODO : CONSTRUCTTORS
-	public Spaceship(String name, int startingFuel) {
-		this.TYPE = SpaceshipType.getRandomType();
+	public Spaceship(String name, int startingFuel, int ID) {
+		this.TYPE = EnumController.getRandomEnum(SpaceshipType.class);
 		this.CREW_CAPACITY = TYPE.CREW_LIMIT;
 		this.FUEL_CAPACITY = TYPE.FUEL_LIMIT;
 
-		this.ID = random.nextInt(100000);
+		this.ID = ID;
 
-		this.location = LocationType.getRandomType();
+		this.location = EnumController.getRandomEnum(LocationType.class);
 
 		this.name = name;
 
@@ -60,7 +57,11 @@ public class Spaceship implements Comparable<Spaceship> {
 	}
 
 	public int compareTo(Spaceship spaceship) {
-		return this.hashCode() - spaceship.hashCode();
+		if (this.CREW_CAPACITY > spaceship.CREW_CAPACITY) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 
 	@Override
@@ -80,11 +81,17 @@ public class Spaceship implements Comparable<Spaceship> {
 		if (! (obj instanceof Spaceship)) return false;
 	
 		Spaceship spaceship = (Spaceship) obj;
+		
+		StringBuilder thisStrRep = new StringBuilder();
+		StringBuilder otherStrRep = new StringBuilder();
 
-		int thisHash = this.hashCode();
-		int otherHash = spaceship.hashCode();
+		thisStrRep.append(this.TYPE);
+		thisStrRep.append(this.ID);
 
-		return thisHash == otherHash;
+		otherStrRep.append(spaceship.TYPE);
+		otherStrRep.append(spaceship.ID);
+
+		return thisStrRep.toString().equals(otherStrRep.toString());
 	}
 
 	@Override

@@ -26,15 +26,6 @@ public enum LocationType {
 		this.location = location;
 	}
 
-	public static LocationType getRandomType() {
-		LocationType[] locationTypes = LocationType.values();
-		int numLocations = locationTypes.length;
-
-		int randomLocation = random.nextInt(numLocations);
-
-		return locationTypes[randomLocation];
-	}
-
 	@Override
 	public String toString() {
 		return this.location;
