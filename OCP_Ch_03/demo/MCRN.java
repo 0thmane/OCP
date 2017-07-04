@@ -30,14 +30,18 @@ public final class MCRN {
 
 	public void generateNavy(int numShips) {
 		for (int i = 0; i < numShips; i++) {
-			int randomShipId = random.nextInt(10000);
+			int randomShipId = random.nextInt(100000);
 
-			Spaceship randomShip = new Spaceship("HMS_Confusing", 0, randomShipId);
-
-			boolean successfulInsert = addShip(randomShip);
-
-			if (!successfulInsert) {
+			if (randomShipId < 1000) {
 				i--;
+			} else {
+				Spaceship randomShip = new Spaceship("HMS_Confusing", 0, randomShipId);
+
+				boolean successfulInsert = addShip(randomShip);
+
+				if (!successfulInsert) {
+					i--;
+				}
 			}
 		}
 	}
@@ -95,31 +99,40 @@ public final class MCRN {
 		return this.civilianCommander;
 	}
 
-	public SortedMap<Integer, Spaceship> callEvacuationShips(int evacuatePeople, 
-			LocationType dispatchFrom) {
-		SortedMap<Integer, Spaceship> evacuationShips = new TreeMap<>();
+	public List<Spaceship> callEvacuationShips(int evacuatePeople, LocationType dispatchFrom) {
+		List<Spaceship> marsNavyList = new ArrayList<>(this.marsNavy.values());
+		List<Spaceship> rescueShips = new ArrayList<>();
 
-		/*
-		for (Map.Entry<Integer, Spaceship> someShip : marsNavy.entrySet()) {
-			evacuationShips.put(someShip);
+		int rescueCapacity = 0;
+
+		for (Spaceship ship : marsNavyList) {
+			if (ship.getLocation().equals(dispatchFrom)) {
+				if (rescueCapacity > evacuatePeople) {
+					break;
+				} else {
+					rescueShips.add(ship);
+					rescueCapacity += ship.CREW_CAPACITY;
+				}
+			}
 		}
-		*/
 
-		for (Integer key : this.marsNavy.keySet()) {
-			
-		}
+		Comparator<Spaceship> byCapacity = (ship1, ship2) -> ship2.CREW_CAPACITY - ship1.CREW_CAPACITY;
 
-		return evacuationShips;
+		Collections.sort(rescueShips, byCapacity);
+
+		System.out.println("\nTotal rescue capacity: " + rescueCapacity + "\n");
+
+		return rescueShips;
 	}
 
 	@Override
 	public String toString() {
-		String strRepresentation = "";
+		StringBuilder strRepresentation = new StringBuilder();
 
 		for (Integer shipID : marsNavy.keySet()) {
-			strRepresentation += "\n\t" + marsNavy.get(shipID);
+			strRepresentation.append("\n\t" + marsNavy.get(shipID));
 		}
 
-		return strRepresentation;
+		return strRepresentation.toString();
 	}
 }

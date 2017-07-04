@@ -10,12 +10,12 @@ public class Spaceship implements Comparable<Spaceship> {
 	private int fuel;
 	private LocationType location;
 
-	public Spaceship(String name, int startingFuel, int ID) {
+	public Spaceship(String name, int startingFuel, int id) {
 		this.TYPE = EnumController.getRandomEnum(SpaceshipType.class);
 		this.CREW_CAPACITY = TYPE.CREW_LIMIT;
 		this.FUEL_CAPACITY = TYPE.FUEL_LIMIT;
 
-		this.ID = ID;
+		this.ID = id;
 
 		this.location = EnumController.getRandomEnum(LocationType.class);
 
@@ -66,20 +66,23 @@ public class Spaceship implements Comparable<Spaceship> {
 
 	@Override
 	public String toString() {
-		String strRepresentation = "";
+		StringBuilder strRepresentation = new StringBuilder();
 
-		strRepresentation += "Ship type: " + this.TYPE;
-		strRepresentation += " Name: " + this.name;
-		strRepresentation += " Location: " + getLocation();
-		strRepresentation += " Capacity: " + this.CREW_CAPACITY;
+		strRepresentation.append("Ship type: " + this.TYPE);
+		strRepresentation.append("\tName: " + this.name);
+		strRepresentation.append("\tID: " + this.ID);
+		strRepresentation.append("\tCapacity: " + this.CREW_CAPACITY);
+		strRepresentation.append("\tLocation: " + getLocation());
 
-		return strRepresentation;
+		return strRepresentation.toString();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (! (obj instanceof Spaceship)) return false;
 	
+		if (this == obj) return true;
+
 		Spaceship spaceship = (Spaceship) obj;
 		
 		StringBuilder thisStrRep = new StringBuilder();
@@ -96,9 +99,11 @@ public class Spaceship implements Comparable<Spaceship> {
 
 	@Override
 	public int hashCode() {
-		int hashCode = 0;
-		String strRepresentation = this.ID + this.name + this.location;
+		int hashCode = 1;
+		
+		hashCode = hashCode * 5 + this.TYPE.hashCode();
+		hashCode = hashCode * 3 + new String("" + this.ID).hashCode();
 
-		return strRepresentation.hashCode();
+		return hashCode;
 	}
 }

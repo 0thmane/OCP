@@ -22,5 +22,4 @@ public class EnumController {
 
 		return enumConstants[randomInt];
 	}
-
 }
