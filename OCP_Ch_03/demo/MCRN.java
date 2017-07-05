@@ -1,10 +1,3 @@
-/*
-	TODO:
-		1. Implement Spaceship comparators based on 
-			- Capacity
-		3. Constructors
-*/
-
 import java.util.*;
 
 public final class MCRN {
@@ -152,6 +145,4 @@ public final class MCRN {
 
 		return strRepresentation.toString();
 	}
-
-	// Restrict access unless necessary, expose when needed as needed.
 }
