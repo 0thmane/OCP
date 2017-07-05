@@ -12,21 +12,19 @@
 import java.util.*;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void rescueSim() {
 		MCRN marsNavy = new MCRNBuilder()
 			.setFleetAdmiral("Adm Dantes")
 			.setFleetCommander("Cmd Mark Twain")
 			.setCivilianCommander("Jules Verne")
-			.setShipLimit(1124)
+			.setShipLimit(430)
 			.build();
-
-		System.out.println("\n\tMARS NAVY FLEET REGISTRAR\n");
 
 		System.out.println(marsNavy);
 
 		LocationType dispatchFrom = LocationType.MARS;
 
-		int livesInDanger = 2500;
+		int livesInDanger = 75000;
 
 		System.out.println("\nLives in danger: " + livesInDanger);
 
@@ -35,5 +33,9 @@ public class Main {
 		for (Spaceship ship : rescueShips) {
 			System.out.println(ship);
 		}
+	}
+
+	public static void main(String[] args) {
+		rescueSim();
 	}
 }

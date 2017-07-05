@@ -129,6 +129,11 @@ public final class MCRN {
 	public String toString() {
 		StringBuilder strRepresentation = new StringBuilder();
 
+		strRepresentation.append("\n\tFLEET REGISTRAR\n");
+		strRepresentation.append("\n\tCivilian Commander: \t" + this.civilianCommander);
+		strRepresentation.append("\n\tFleet Admiral: \t\t" + this.fleetAdmiral);
+		strRepresentation.append("\n\tFleet Commander: \t" + this.fleetCommander + "\n\n");
+
 		for (Integer shipID : marsNavy.keySet()) {
 			strRepresentation.append("\n\t" + marsNavy.get(shipID));
 		}
