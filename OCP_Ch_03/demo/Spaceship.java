@@ -1,23 +1,24 @@
 import java.util.*;
 
 public class Spaceship implements Comparable<Spaceship> {
-	public final SpaceshipType TYPE;
-	public final int CREW_CAPACITY;
+	public final SpaceshipType type;
+	public final int crewCapacity;
+	public final int fuelCapacity;
 	public final int ID;
-	public final int FUEL_CAPACITY;
 
 	private String name;
 	private int fuel;
 	private LocationType location;
 
-	public Spaceship(String name, int startingFuel, int id) {
-		this.TYPE = EnumController.getRandomEnum(SpaceshipType.class);
-		this.CREW_CAPACITY = TYPE.CREW_LIMIT;
-		this.FUEL_CAPACITY = TYPE.FUEL_LIMIT;
+	public Spaceship(String name, int startingFuel, int id, SpaceshipType type, 
+			LocationType location) {
+		this.type = type;
+		this.crewCapacity = type.getCrewLimit();
+		this.fuelCapacity = type.getFuelLimit();
 
 		this.ID = id;
 
-		this.location = EnumController.getRandomEnum(LocationType.class);
+		this.location = location;
 
 		this.name = name;
 
@@ -33,12 +34,12 @@ public class Spaceship implements Comparable<Spaceship> {
 	}
 
 	public void addFuel(int fuelAmount) {
-		int emptyFuelCapacity = this.FUEL_CAPACITY - this.fuel;
+		int emptyFuelCapacity = this.fuelCapacity - this.fuel;
 
 		if (fuelAmount < 0) {
 			throw new IllegalArgumentException("Cannot add negative fuel.");
 		} else if(fuelAmount > emptyFuelCapacity) {
-			this.fuel = this.FUEL_CAPACITY;
+			this.fuel = this.fuelCapacity;
 		} else {
 			this.fuel += fuelAmount;
 		}
@@ -57,7 +58,7 @@ public class Spaceship implements Comparable<Spaceship> {
 	}
 
 	public int compareTo(Spaceship spaceship) {
-		if (this.CREW_CAPACITY > spaceship.CREW_CAPACITY) {
+		if (this.crewCapacity > spaceship.crewCapacity) {
 			return 1;
 		} else {
 			return -1;
@@ -68,10 +69,10 @@ public class Spaceship implements Comparable<Spaceship> {
 	public String toString() {
 		StringBuilder strRepresentation = new StringBuilder();
 
-		strRepresentation.append("Ship type: " + this.TYPE);
+		strRepresentation.append("Ship type: " + this.type);
 		strRepresentation.append("\tName: " + this.name);
 		strRepresentation.append("\tID: " + this.ID);
-		strRepresentation.append("\tCapacity: " + this.CREW_CAPACITY);
+		strRepresentation.append("\tCapacity: " + this.crewCapacity);
 		strRepresentation.append("\tLocation: " + getLocation());
 
 		return strRepresentation.toString();
@@ -88,10 +89,10 @@ public class Spaceship implements Comparable<Spaceship> {
 		StringBuilder thisStrRep = new StringBuilder();
 		StringBuilder otherStrRep = new StringBuilder();
 
-		thisStrRep.append(this.TYPE);
+		thisStrRep.append(this.type);
 		thisStrRep.append(this.ID);
 
-		otherStrRep.append(spaceship.TYPE);
+		otherStrRep.append(spaceship.type);
 		otherStrRep.append(spaceship.ID);
 
 		return thisStrRep.toString().equals(otherStrRep.toString());
@@ -101,7 +102,7 @@ public class Spaceship implements Comparable<Spaceship> {
 	public int hashCode() {
 		int hashCode = 1;
 		
-		hashCode = hashCode * 5 + this.TYPE.hashCode();
+		hashCode = hashCode * 5 + this.type.hashCode();
 		hashCode = hashCode * 3 + new String("" + this.ID).hashCode();
 
 		return hashCode;

@@ -1,9 +1,3 @@
-/*
-	TODO:
-		1. Add more Enums
-		2. Move getRandomType to a Generic
-*/
-
 import java.util.*;
 
 public enum SpaceshipType {
@@ -16,13 +10,19 @@ public enum SpaceshipType {
 	TROOP_LANDER(7000, 175),
 	CORVETTE(1750, 100);
 
-	public final int FUEL_LIMIT;
-	public final int CREW_LIMIT;
-
-	private static Random random = new Random();
+	private int fuelLimit;
+	private int crewLimit;
 
 	private SpaceshipType(int fuelLimit, int crewLimit) {
-		this.FUEL_LIMIT = fuelLimit;
-		this.CREW_LIMIT = crewLimit;
+		this.fuelLimit = fuelLimit;
+		this.crewLimit = crewLimit;
+	}
+
+	public int getFuelLimit() {
+		return this.fuelLimit;
+	}
+
+	public int getCrewLimit() {
+		return this.crewLimit;
 	}
 }

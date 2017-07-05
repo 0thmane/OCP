@@ -31,11 +31,19 @@ public final class MCRN {
 	public void generateNavy(int numShips) {
 		for (int i = 0; i < numShips; i++) {
 			int randomShipId = random.nextInt(100000);
+			SpaceshipType randomSpaceshipType = EnumController.getRandomEnum(SpaceshipType.class);
+			LocationType randomLocationType = EnumController.getRandomEnum(LocationType.class);
 
 			if (randomShipId < 1000) {
 				i--;
 			} else {
-				Spaceship randomShip = new Spaceship("HMS_Confusing", 0, randomShipId);
+				Spaceship randomShip = new SpaceshipBuilder()
+					.setSpaceshipType(randomSpaceshipType)
+					.setLocationType(randomLocationType)
+					.setId(randomShipId)
+					.setFuel(randomSpaceshipType.getFuelLimit())
+					.setName("HMS_Confusing")
+					.build();
 
 				boolean successfulInsert = addShip(randomShip);
 
@@ -100,7 +108,7 @@ public final class MCRN {
 	}
 
 	public List<Spaceship> callEvacuationShips(int evacuatePeople, LocationType dispatchFrom) {
-		List<Spaceship> marsNavyList = new ArrayList<>(this.marsNavy.values());
+		Collection<Spaceship> marsNavyList = this.marsNavy.values();
 		List<Spaceship> rescueShips = new ArrayList<>();
 
 		int rescueCapacity = 0;
@@ -111,12 +119,12 @@ public final class MCRN {
 					break;
 				} else {
 					rescueShips.add(ship);
-					rescueCapacity += ship.CREW_CAPACITY;
+					rescueCapacity += ship.crewCapacity;
 				}
 			}
 		}
 
-		Comparator<Spaceship> byCapacity = (ship1, ship2) -> ship2.CREW_CAPACITY - ship1.CREW_CAPACITY;
+		Comparator<Spaceship> byCapacity = (ship1, ship2) -> ship2.crewCapacity - ship1.crewCapacity;
 
 		Collections.sort(rescueShips, byCapacity);
 
@@ -134,10 +142,12 @@ public final class MCRN {
 		strRepresentation.append("\n\tFleet Admiral: \t\t" + this.fleetAdmiral);
 		strRepresentation.append("\n\tFleet Commander: \t" + this.fleetCommander + "\n\n");
 
-		for (Integer shipID : marsNavy.keySet()) {
-			strRepresentation.append("\n\t" + marsNavy.get(shipID));
+		for (Map.Entry<Integer, Spaceship> ship : marsNavy.entrySet()) {
+			strRepresentation.append("\n\t" + ship.getValue());
 		}
 
 		return strRepresentation.toString();
 	}
+
+	// Restrict access unless necessary, expose when needed as needed.
 }

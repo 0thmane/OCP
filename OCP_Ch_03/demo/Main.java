@@ -24,7 +24,7 @@ public class Main {
 
 		LocationType dispatchFrom = LocationType.MARS;
 
-		int livesInDanger = 75000;
+		int livesInDanger = 2500;
 
 		System.out.println("\nLives in danger: " + livesInDanger);
 
