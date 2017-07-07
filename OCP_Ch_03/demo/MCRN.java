@@ -135,7 +135,7 @@ public final class MCRN {
 		strRepresentation.append("\n\tFleet Admiral: \t\t" + this.fleetAdmiral);
 		strRepresentation.append("\n\tFleet Commander: \t" + this.fleetCommander + "\n\n");
 
-		marsNavy.forEach((k, v) -> strRepresentation.append("\n\t" + v));
+		marsNavy.forEach((key, ship) -> strRepresentation.append("\n\t" + ship));
 
 		/* Alternative
 		for (Map.Entry<Integer, Spaceship> ship : marsNavy.entrySet()) {

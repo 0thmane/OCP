@@ -1,0 +1,20 @@
+OCP Chapter 4
+
+Things Covered
+
+	- Lambdas
+	- Built-In Functional Interfaces
+		- Supplier
+		- Consumer
+		- BiCOnsumer
+		- Predicate
+		- BiPredicate
+		- Function
+		- BiFunction
+		- UnaryOperator
+		- BinaryOperator
+	- Optional
+
+Ideas
+
+	- 
