@@ -17,4 +17,5 @@ Things Covered
 
 Ideas
 
-	- 
+	- Simplify Demo
+	- Perhaps modify previous demo?
