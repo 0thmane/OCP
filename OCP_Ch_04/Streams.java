@@ -55,6 +55,5 @@ public class Streams {
 		
 		Optional<Double> someDouble = average(50, 555);
 		someDouble.ifPresent(System.out::println);
-
 	}
 }
