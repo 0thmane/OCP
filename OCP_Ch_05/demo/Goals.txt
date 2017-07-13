@@ -1,0 +1,13 @@
+OCP Chapter 5
+
+Topics Covered
+	- DateTime
+	- Duration
+	- Formating
+	- Locale
+	- Localization
+	- Resources
+
+Demo Ideas
+	- Show current local and time formatted based on it
+	- Show current time in Oakville
