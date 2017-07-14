@@ -16,7 +16,6 @@ public class TimeLocale {
 
 		Locale localeBuilder = new Locale.Builder()
 			.setLanguage("fr")
-			.setCountry("CA")
 			.build();
 	}
 }

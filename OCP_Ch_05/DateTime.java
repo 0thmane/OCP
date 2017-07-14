@@ -26,8 +26,8 @@ public class DateTime {
 
 		ZoneId.getAvailableZoneIds()
 			.stream()
-			.sorted();
-			//.forEach(System.out::println);
+			.sorted()
+			.forEach(System.out::println);
 
 		System.out.println("\n" + secondDate);
 
