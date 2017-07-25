@@ -1,1 +1,4 @@
-src\main\java\Main.class
+Main.class
+NEO.class
+NEOBuilder.class
+NEOManager.class

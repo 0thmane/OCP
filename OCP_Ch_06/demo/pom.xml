@@ -8,29 +8,37 @@
     <version>1.0.0</version>
     <properties>
         <junit.version>4.12</junit.version>
-        <main-class>demo.src.main.java.Main</main-class>
-        <jdk.version>1.8</jdk.version>
+        <main-class>Main</main-class>
+        <jdk.version>1.8.0_141</jdk.version>
     </properties>
     <build>  
         <plugins>  
-        <plugin>  
-            <groupId>org.codehaus.mojo</groupId>  
-            <artifactId>exec-maven-plugin</artifactId>  
-            <version>1.2.1</version>  
-            <executions>  
-            <execution>  
-                <phase>initialize</phase>  
-                <goals>  
-                    <goal>java</goal>  
-                </goals>  
-                <configuration>  
-                    <mainClass>src.main.java.Main</mainClass>  
-                    <arguments>  
-                    </arguments>  
-                </configuration>  
-            </execution>  
-            </executions>  
-        </plugin>  
+            <plugin>  
+                <groupId>org.codehaus.mojo</groupId>  
+                <artifactId>exec-maven-plugin</artifactId>  
+                <version>1.2.1</version>  
+                <executions>  
+                <execution>  
+                    <phase>install</phase>  
+                    <goals>  
+                        <goal>java</goal>  
+                    </goals>  
+                    <configuration>  
+                        <mainClass>Main</mainClass>  
+                        <arguments></arguments>  
+                    </configuration>  
+                </execution>  
+                </executions>  
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <mainClass>Main</mainClass>
+                    <arguments></arguments>
+                </configuration>
+            </plugin>
         </plugins>  
     </build>
     <dependencies>
@@ -47,6 +55,12 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.16.18</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

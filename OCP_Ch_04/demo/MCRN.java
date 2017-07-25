@@ -102,7 +102,7 @@ public final class MCRN {
 			.forEach(potentialRescueShips::add);
 
 
-		// This loop can be replaces with takeWhile in Java 9
+		// This loop can be replaced with takeWhile in Java 9
 		for (Spaceship ship : potentialRescueShips) {
 			if (rescueCapacity < evacuatePeople) {
 				desiredRescueShips.add(ship);
