@@ -51,6 +51,6 @@ public class NEOBuilder {
     }
 
     public NEO build() {
-        return new NEO(id, nominalDistance, minimalDistance, relativeVelocity, estimatedDiameter);
+        return new NEO(id, approachDate, nominalDistance, minimalDistance, relativeVelocity, estimatedDiameter);
     }
 }

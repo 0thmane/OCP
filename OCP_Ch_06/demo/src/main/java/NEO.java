@@ -7,10 +7,11 @@ public class NEO {
 
 	public final int id;
 
-	public NEO (int id, double nominalDistance, double minimalDistance, double relativeVelocity,
+	public NEO (int id, String approachDate, double nominalDistance, double minimalDistance, double relativeVelocity,
 				String estimatedDiameter) {
 		this.id = id;
 
+		this.setApproachDate(approachDate);
 		this.setNominalDistance(nominalDistance);
 		this.setMinimalDistance(minimalDistance);
 		this.setRelativeVelocity(relativeVelocity);
@@ -85,12 +86,12 @@ public class NEO {
 	public String toString() {
 		StringBuilder strRepresentation = new StringBuilder();
 
-		strRepresentation.append(this.id + "\t");
-		strRepresentation.append(this.approachDate + "\t");
-		strRepresentation.append(this.nominalDistance + "\t");
-		strRepresentation.append(this.minimalDistance + "\t");
-		strRepresentation.append(this.relativeVelocity + "\t");
-		strRepresentation.append(this.estimatedDiameter + "\t");
+		strRepresentation.append(this.id);
+		strRepresentation.append(String.format("%25s", this.approachDate));
+		strRepresentation.append(String.format("%30s", this.nominalDistance));
+		strRepresentation.append(String.format("%30s", this.minimalDistance));
+		strRepresentation.append(String.format("%30s", this.relativeVelocity));
+		strRepresentation.append(String.format("%30s", this.estimatedDiameter));
 
 		return strRepresentation.toString();
 	}
