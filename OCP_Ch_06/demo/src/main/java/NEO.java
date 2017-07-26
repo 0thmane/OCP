@@ -19,7 +19,7 @@ public class NEO {
 	}
 
 	public void setApproachDate(String approachDate) {
-		if (approachDate == null || approachDate.length() == 0) {
+		if (approachDate == null) {
 			throw new IllegalArgumentException("Invalid approachDate");
 		}
 
@@ -55,7 +55,7 @@ public class NEO {
 	}
 
 	public void setEstimatedDiameter(String estimatedDiameter) {
-		if (estimatedDiameter == null || estimatedDiameter.length() == 0) {
+		if (estimatedDiameter == null) {
 			throw new IllegalArgumentException("Invalid esimatedDiameter");
 		}
 
