@@ -1,22 +1,31 @@
-import java.time.*;
-
 public class NEO {
-	private final int id;
-	private LocalDateTime approachDate;
+	private String approachDate;
+	private String estimatedDiameter;
 	private double nominalDistance;
 	private double minimalDistance;
 	private double relativeVelocity;
-	private String estimatedDiameter;
 
-	public NEO (int id) {
+	public final int id;
+
+	public NEO (int id, double nominalDistance, double minimalDistance, double relativeVelocity,
+				String estimatedDiameter) {
 		this.id = id;
+
+		this.setNominalDistance(nominalDistance);
+		this.setMinimalDistance(minimalDistance);
+		this.setRelativeVelocity(relativeVelocity);
+		this.setEstimatedDiameter(estimatedDiameter);
 	}
 
-	public void setApproachDate(LocalDateTime approachDate) {
+	public void setApproachDate(String approachDate) {
+		if (approachDate == null || approachDate.length() == 0) {
+			throw new IllegalArgumentException("Invalid approachDate");
+		}
+
 		this.approachDate = approachDate;
 	}
 
-	public LocalDateTime getApproachDate() {
+	public String getApproachDate() {
 		return this.approachDate;
 	}
 
@@ -45,6 +54,10 @@ public class NEO {
 	}
 
 	public void setEstimatedDiameter(String estimatedDiameter) {
+		if (estimatedDiameter == null || estimatedDiameter.length() == 0) {
+			throw new IllegalArgumentException("Invalid esimatedDiameter");
+		}
+
 		this.estimatedDiameter = estimatedDiameter;
 	}
 
@@ -54,6 +67,31 @@ public class NEO {
 
 	@Override
 	public boolean equals(Object obj) {
-		
+		if(!(obj instanceof NEO)) return false;
+
+		if(this == obj) return true;
+
+		NEO otherNEO = (NEO) obj;
+
+		return this.id == otherNEO.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.id;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder strRepresentation = new StringBuilder();
+
+		strRepresentation.append(this.id + "\t");
+		strRepresentation.append(this.approachDate + "\t");
+		strRepresentation.append(this.nominalDistance + "\t");
+		strRepresentation.append(this.minimalDistance + "\t");
+		strRepresentation.append(this.relativeVelocity + "\t");
+		strRepresentation.append(this.estimatedDiameter + "\t");
+
+		return strRepresentation.toString();
 	}
 }
