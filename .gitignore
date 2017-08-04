@@ -19,8 +19,8 @@
 ## Plugin-specific files:
 
 # IntelliJ
-/out/
-/.idea/
+out/
+.idea/
 *.iml
 
 
