@@ -26,3 +26,6 @@ OCP Chapter 7
 
     IDEA 3
     Write a matrix-adding algorithm. Test it's performance parallelized vs linear.
+
+    IDEA 4
+    Write a provider and a consumer that use the same data store.
