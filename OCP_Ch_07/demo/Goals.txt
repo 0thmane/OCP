@@ -1,5 +1,17 @@
 OCP Chapter 7
 
+    Topics Covered:
+        - Threads
+        - Runnable
+        - Callable
+        - ExecutorService
+        - Synchronized Data Access
+        - Concurrent Collections
+        - Parallel Streams
+        - Concurrent Processes
+        - Threading Problems
+
+    IDEA 1
 	Compare execution time for a for loop, a stream and a parallel stream.
 
 	Test Data:
@@ -8,3 +20,9 @@ OCP Chapter 7
 		List of 100000 Strings
 		List of 10000000 Strings
 		List of 1000000000 Strings
+
+    IDEA 2
+    Write a matrix-multiplying algorithm. Parallelize it. Optimize it. See how it scales especially if you have a multi-core machine.
+
+    IDEA 3
+    Write a matrix-adding algorithm. Test it's performance parallelized vs linear.
