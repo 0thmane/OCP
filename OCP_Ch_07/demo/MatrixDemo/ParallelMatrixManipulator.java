@@ -7,15 +7,15 @@ public class ParallelMatrixManipulator {
 
     public static List<List<Integer>> addMatrices(List<List<Integer>> matrixA, List<List<Integer>> matrixB) {
         List<List<Integer>> result = new ArrayList<>();
-        int rowSize = matrixA.get(0).size();
-        int columnSize = matrixA.size();
+        int matrixWidth = matrixA.size();
+        int matrixHeight = matrixA.get(0).size();
 
-        IntStream.range(0, columnSize)
+        IntStream.range(0, matrixHeight)
             .parallel()
             .forEach(columnIndex -> {
                 List<Integer> resultingRow = new ArrayList<>();
 
-                IntStream.range(0, rowSize)
+                IntStream.range(0, matrixWidth)
                     .forEach(rowIndex -> {
                         Integer newElement = new Integer(matrixA.get(columnIndex).get(rowIndex) + matrixB.get(columnIndex).get(rowIndex));
 
