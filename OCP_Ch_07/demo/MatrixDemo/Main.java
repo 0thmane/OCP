@@ -51,7 +51,7 @@ public class Main {
     private static List<List<Integer>> generateMatrixTwo() {
         List<List<Integer>> matrix = new ArrayList<>();
         List<Integer> row1 = Arrays.asList(9, 8, 7);
-        List<Integer> row2 = Arrays.asList(6, 5, 4);
+        List<Integer> row2 = Arrays.asList(6, 15, 4);
         List<Integer> row3 = Arrays.asList(3, 2, 1);
 
         matrix.add(row1);
@@ -94,7 +94,7 @@ public class Main {
         printMatrix(matrixB);
         System.out.println("=");
         printMatrix(MatrixManipulator.addMatrices(matrixA, matrixB));
-
+        printMatrix(ParallelMatrixManipulator.addMatrices(matrixA, matrixB));
         // ---- Sequentially adding the Matrices
         timeSequentialAddition(iterationLimit);
 
