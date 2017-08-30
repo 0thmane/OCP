@@ -1,7 +1,7 @@
 import java.util.*;
 
 public enum SpaceshipType {
-	// (fuelLimit, crewLimit)
+	// TYPE_NAME(fuelLimit, crewLimit)
 	SHUTTLE(50, 5),
 	LIGHT_CARGO(250, 45),
 	MEDIUM_CARGO(750, 75),
