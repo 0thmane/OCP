@@ -9,3 +9,5 @@ OCP Chapter 8
       - Use a file as a mini database
         - row as record delimiter
         - semi-colon as field delimiter
+
+        - Files: Reuse Spaceship, SpaceshipBuilder, SpaceshipType from Chapter 4 Demo
