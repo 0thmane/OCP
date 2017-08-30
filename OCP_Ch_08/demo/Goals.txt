@@ -1,0 +1,11 @@
+OCP Chapter 8
+
+    Topics Covered:
+        - File System Structure
+        - Working with Streams
+        - User Interaction
+
+    IDEA 1
+      - Use a file as a mini database
+        - row as record delimiter
+        - semi-colon as field delimiter
