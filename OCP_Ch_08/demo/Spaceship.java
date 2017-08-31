@@ -1,5 +1,3 @@
-package src.main.java;
-
 import java.util.*;
 
 public class Spaceship implements Comparable<Spaceship> {
@@ -12,7 +10,7 @@ public class Spaceship implements Comparable<Spaceship> {
 	private int fuel;
 	private LocationType location;
 
-	public Spaceship(String name, int startingFuel, int id, SpaceshipType type, 
+	public Spaceship(String name, int startingFuel, int id, SpaceshipType type,
 			LocationType location) {
 		this.type = type;
 		this.crewCapacity = type.getCrewLimit();
@@ -55,10 +53,11 @@ public class Spaceship implements Comparable<Spaceship> {
 		if (location == null) {
 			throw new IllegalArgumentException("Location cannot be empty.");
 		}
-		
+
 		this.location = location;
 	}
 
+  // TODO: Fix this up
 	public int compareTo(Spaceship spaceship) {
 		if (this.crewCapacity > spaceship.crewCapacity) {
 			return 1;
@@ -83,11 +82,11 @@ public class Spaceship implements Comparable<Spaceship> {
 	@Override
 	public boolean equals(Object obj) {
 		if (! (obj instanceof Spaceship)) return false;
-	
+
 		if (this == obj) return true;
 
 		Spaceship spaceship = (Spaceship) obj;
-		
+
 		StringBuilder thisStrRep = new StringBuilder();
 		StringBuilder otherStrRep = new StringBuilder();
 
@@ -103,7 +102,7 @@ public class Spaceship implements Comparable<Spaceship> {
 	@Override
 	public int hashCode() {
 		int hashCode = 1;
-		
+
 		hashCode = hashCode * 5 + this.type.hashCode();
 		hashCode = hashCode * 3 + new String("" + this.ID).hashCode();
 

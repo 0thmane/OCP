@@ -1,5 +1,16 @@
+import java.io.File;
+import java.io.IOException;
+
 public class SpaceshipDao {
-  private static final String FILENAME = "SpaceshipsDB.txt";
+  private static final String FILENAME = "SpaceshipsDB.csv";
+  private static final String FIELD_DELIMITER = ",";
+  private static final File spaceshipDb = new File(FILENAME);
+
+  public void SpaceshipDao() throws IOException {
+    if (!spaceshipDbExists()) {
+      createSpaceshipDb();
+    }
+  }
 
   // TODO
   public static boolean writeShip(Spaceship newShip) {
@@ -10,18 +21,31 @@ public class SpaceshipDao {
 
   // TODO
   public static Spaceship readShip(int ID) {
-    Spaceship storedSpaceship;
+    Spaceship storedSpaceship = null;
 
     return storedSpaceship;
   }
 
-  // TODO
   private boolean spaceshipDbExists() {
-    boolean exists = false;
-
-    return exists;
+    return spaceshipDb.exists();
   }
 
   // TODO
-  private void createSpaceshipDb() {}
+  private void createSpaceshipDb() throws IOException {
+    spaceshipDb.createNewFile();
+  }
+
+  // TODO
+  private String strSpaceshipRepresentation(Spaceship spaceship) {
+    String strRepresentation = "";
+
+    return strRepresentation;
+  }
+
+  // TODO
+  private Spaceship parseStrSpaceshipRepresentation(String strSpaceshipRepresentation) {
+    Spaceship resultingSpaceship = null;
+
+    return resultingSpaceship;
+  }
 }
