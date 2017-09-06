@@ -3,11 +3,11 @@ OCP Chapter 8
     Topics Covered:
         - File System Structure
         - Working with Streams
-        - User Interaction
+        - User Interaction (Console)
 
     IDEA 1
       - Use a file as a mini database
         - row as record delimiter
         - semi-colon as field delimiter
 
-        - Files: Reuse Spaceship, SpaceshipBuilder, SpaceshipType from Chapter 4 Demo
+        - Files: Reuse Spaceship and related classes from Chapter 4 Demo

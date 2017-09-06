@@ -1,20 +1,32 @@
+import java.util.List;
+import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 
 public class SpaceshipDao {
-  private static final String FILENAME = "SpaceshipsDB.csv";
+  private static final String FILENAME = "db/SpaceshipsDB.csv";
   private static final String FIELD_DELIMITER = ",";
   private static final File spaceshipDb = new File(FILENAME);
 
-  public void SpaceshipDao() throws IOException {
+  public SpaceshipDao() {
     if (!spaceshipDbExists()) {
-      createSpaceshipDb();
+      try {
+          createSpaceshipDb();
+      } catch (IOException e) {
+        throw new RuntimeException("Error occured in SpaceshipDao initialization");
+      }
     }
   }
 
   // TODO
-  public static boolean writeShip(Spaceship newShip) {
+  public static boolean writeShip(Spaceship newShip) throws ShipExistsException {
     boolean success = false;
+
+    if (readShip(newShip.ID) != null) {
+      throw new ShipExistsException();
+    }
+
+    // Write the ship to db
 
     return success;
   }
@@ -26,11 +38,20 @@ public class SpaceshipDao {
     return storedSpaceship;
   }
 
+  // TODO
+  public static void writeAll(List<Spaceship> shipList) {}
+
+  // TODO
+  public static List<Spaceship> readAll() {
+    List<Spaceship> allShips = new ArrayList<>();
+
+    return allShips;
+  }
+
   private boolean spaceshipDbExists() {
     return spaceshipDb.exists();
   }
 
-  // TODO
   private void createSpaceshipDb() throws IOException {
     spaceshipDb.createNewFile();
   }
