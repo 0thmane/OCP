@@ -11,3 +11,6 @@ OCP Chapter 8
         - semi-colon as field delimiter
 
         - Files: Reuse Spaceship and related classes from Chapter 4 Demo
+
+    IDEA 2
+      - Write ships as unique files per ID

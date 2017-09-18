@@ -1,6 +1,7 @@
 import java.util.*;
+import java.io.Serializable;
 
-public class Spaceship implements Comparable<Spaceship> {
+public class Spaceship implements Serializable, Comparable<Spaceship> {
 	public final SpaceshipType type;
 	public final int crewCapacity;
 	public final int fuelCapacity;

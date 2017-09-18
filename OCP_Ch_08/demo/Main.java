@@ -37,19 +37,25 @@ public class Main {
         try {
           spaceshipDao.writeShip(ship);
         } catch (ShipExistsException e) {
-          // That's fine...
+          // That's fine... just random test data
         }
       });
   }
 
-  public static void runDemo() {
+  private static void singularExample() {
+    Spaceship roci = generateShip("MCRN Rocinante", 0);
+
     try {
-      Spaceship roci = generateShip("MCRN Rocinante", 0);
       spaceshipDao.writeShip(roci);
     } catch (ShipExistsException e) {}
 
     Spaceship storedRoci = spaceshipDao.readShip(roci.ID);
     console.writer().println(storedRoci);
+  }
+
+  public static void runDemo() {
+    singularExample();
+    storeRandomShips(45, 100);
   }
 
   public static void main(String[] args) {

@@ -1,10 +1,11 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.io.File;
 import java.io.IOException;
 
 public class SpaceshipDao {
-  private static final String FILENAME = "db/SpaceshipsDB.csv";
+  private static final String FILENAME = "db/SpaceshipsDB.data";
   private static final String FIELD_DELIMITER = ",";
   private static final File spaceshipDb = new File(FILENAME);
 
@@ -32,14 +33,23 @@ public class SpaceshipDao {
   }
 
   // TODO
-  public static Spaceship readShip(int ID) {
+  public static Spaceship readShip(int id) {
     Spaceship storedSpaceship = null;
-
+    
     return storedSpaceship;
   }
 
   // TODO
-  public static void writeAll(List<Spaceship> shipList) {}
+  public static boolean deleteShip(int id) {
+    boolean success = false;
+
+    if (readShip(newShip.ID) != null) {}
+
+    return success;
+  }
+
+  // TODO
+  public static void writeAll(List<Spaceship> shipList, Optional<Boolean> overwrite) {}
 
   // TODO
   public static List<Spaceship> readAll() {
@@ -54,19 +64,5 @@ public class SpaceshipDao {
 
   private void createSpaceshipDb() throws IOException {
     spaceshipDb.createNewFile();
-  }
-
-  // TODO
-  private String strSpaceshipRepresentation(Spaceship spaceship) {
-    String strRepresentation = "";
-
-    return strRepresentation;
-  }
-
-  // TODO
-  private Spaceship parseStrSpaceshipRepresentation(String strSpaceshipRepresentation) {
-    Spaceship resultingSpaceship = null;
-
-    return resultingSpaceship;
   }
 }
