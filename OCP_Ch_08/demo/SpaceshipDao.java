@@ -5,64 +5,90 @@ import java.io.File;
 import java.io.IOException;
 
 public class SpaceshipDao {
-  private static final String FILENAME = "db/SpaceshipsDB.data";
-  private static final String FIELD_DELIMITER = ",";
-  private static final File spaceshipDb = new File(FILENAME);
 
-  public SpaceshipDao() {
-    if (!spaceshipDbExists()) {
-      try {
-          createSpaceshipDb();
-      } catch (IOException e) {
-        throw new RuntimeException("Error occured in SpaceshipDao initialization");
-      }
-    }
+  private static final String DB_LOCATION = "db/";
+  private static final String EXTENSION = ".sp";
+
+  private SpaceshipDao() {}
+
+  public static boolean existsShip(int id) {
+    boolean exists = false;
+
+    File potentialFile = new File(DB_LOCATION + String.valueOf(id) + EXTENSION);
+    exists = potentialFile.exists();
+
+    return exists;
   }
 
-  // TODO
-  public static boolean writeShip(Spaceship newShip) throws ShipExistsException {
+  public static boolean writeShip(Spaceship newShip, boolean overwrite) throws ShipExistsException {
     boolean success = false;
 
-    if (readShip(newShip.ID) != null) {
+    if (existsShip(newShip.ID) & !overwrite) {
       throw new ShipExistsException();
     }
 
-    // Write the ship to db
+    serializeShip(newShip);
 
     return success;
   }
 
-  // TODO
-  public static Spaceship readShip(int id) {
+  public static Spaceship readShip(int id) throws ShipNotFoundException {
     Spaceship storedSpaceship = null;
-    
+
+    if (existsShip(newShip.ID)) {
+      File potentialFile = new File(DB_LOCATION + String.valueOf(id) + EXTENSION);
+      storedSpaceship = deserializeShip(potentialFile);
+    } else {
+      throw new ShipNotFoundException();
+    }
+
     return storedSpaceship;
   }
 
-  // TODO
   public static boolean deleteShip(int id) {
     boolean success = false;
 
-    if (readShip(newShip.ID) != null) {}
+    if (existsShip(newShip.ID)) {
+      File shipFile = new File(DB_LOCATION + String.valueOf(id) + EXTENSION);
+      shipFile.delete();
+    } else {
+      throw new RuntimeException("Ship with id " + id + "could not be found.");
+    }
 
     return success;
   }
 
   // TODO
-  public static void writeAll(List<Spaceship> shipList, Optional<Boolean> overwrite) {}
-
-  // TODO
-  public static List<Spaceship> readAll() {
+  public static void writeAll(List<Spaceship> shipList, boolean overwrite) {
     List<Spaceship> allShips = new ArrayList<>();
+
+    for (Spaceship ship : allShips) {
+      writeShip(ship, overwrite);
+    }
 
     return allShips;
   }
 
-  private boolean spaceshipDbExists() {
-    return spaceshipDb.exists();
+  // TODO
+  public static List<Spaceship> readAll() throws ShipExistsException {
+    List<Spaceship> allShips = new ArrayList<>();
+
+    File root = new File(DB_LOCATION);
+
+    return allShips;
   }
 
-  private void createSpaceshipDb() throws IOException {
-    spaceshipDb.createNewFile();
+  // TODO
+  private static boolean serializeShip(Spaceship ship) {
+    boolean success = false;
+
+    return success;
+  }
+
+  // TODO
+  private static Spaceship deserializeShip(int shipFile) {
+    Spaceship ship = null;
+
+    return ship;
   }
 }
