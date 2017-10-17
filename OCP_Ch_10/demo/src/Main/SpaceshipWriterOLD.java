@@ -2,15 +2,15 @@ package Main;
 
 import Exceptions.FileExistsException;
 
-import java.io.*;
-import java.nio.file.Path;  // NIO 2
-import java.nio.file.Paths; // NIO 2
-import java.nio.file.Files; // NIO 2
+import java.io.File;                // NIO
+import java.io.FileOutputStream;    // NIO
+import java.io.IOException;
+import java.io.OutputStream;        // NIO
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class SpaceshipWriter {
+public class SpaceshipWriterOLD {
     public static List<String> writeShipsToFiles(String targetURL, List<SpaceshipDto> spaceships, boolean overwrite) {
         List<String> failedShipNames;
 
@@ -19,7 +19,7 @@ public class SpaceshipWriter {
                     try {
                         writeShipToFile(targetURL, ship, overwrite);
                     } catch (IOException | FileExistsException e){
-                        return ship.getName();
+                        return ship.getName() + " " + e.getMessage();
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -33,22 +33,26 @@ public class SpaceshipWriter {
 
     public static void writeShipToFile(String targetURL, SpaceshipDto ship, boolean overwrite) throws IOException, FileExistsException {
         String filename = generateShipFilename(ship);
-        Path shipPath = Paths.get(targetURL + filename);
-
         ensureTargetDirExists(targetURL);
 
-        if (!overwrite & Files.exists(shipPath)) {
+        File shipFile = new File(targetURL + filename);                 // File vs Path
+
+        if (!overwrite & shipFile.exists()) {
             throw new FileExistsException("Cannot overwrite existing file.");
         }
 
-        Files.write(shipPath, generateShipByteArray(ship));
+        try (OutputStream out = new FileOutputStream(shipFile)) {               // try with resources
+            byte[] shipByteRepresentation = generateShipByteArray(ship);
+
+            out.write(shipByteRepresentation);
+        }
     }
 
     private static void ensureTargetDirExists(String targetURL) throws IOException {
-        Path targetPath = Paths.get(targetURL);
+        File directory = new File(targetURL);
 
-        if (!Files.exists(targetPath)) {
-            Files.createDirectory(Paths.get(targetURL));
+        if (!directory.exists()) {
+            directory.mkdir();
         }
     }
 
