@@ -1,103 +1,107 @@
 import java.util.*;
 
 /**
- Matrix-adding algorithm implemented in parallel and sequential fashion.
-
- Comparing performance.
+ * Matrix-adding algorithm implemented in parallel and sequential fashion.
+ * <p>
+ * Comparing performance.
  **/
-
 public class Main {
 
-    private static List<List<Integer>> matrixA = generateMatrixOne();
-    private static List<List<Integer>> matrixB = generateMatrixTwo();
-    private static List<List<Integer>> result = new ArrayList<>();
-    private static long startTime = 0;
-    private static long endTime = 0;
+  private static List<List<Integer>> matrixA = generateMatrixOne();
+  private static List<List<Integer>> matrixB = generateMatrixTwo();
+  private static List<List<Integer>> result = new ArrayList<>();
 
-    private static void printMatrix(List<List<Integer>> matrix) {
-        StringBuilder strRepresentation = new StringBuilder();
+  private static void printMatrix(List<List<Integer>> matrix) {
+    StringBuilder strRepresentation = new StringBuilder();
 
-        for (List<Integer> row : matrix ) {
-            for (Integer element : row) {
-                strRepresentation.append(String.format("%5s", element));
+    matrix.forEach(column -> {
+              column.forEach(
+                      element -> strRepresentation.append(String.format("%5s", element)));
+              strRepresentation.append("\n");
             }
+    );
 
-            strRepresentation.append("\n");
-        }
+    System.out.println(strRepresentation);
+  }
 
-        System.out.println(strRepresentation);
+  private static void printTimeTaken(long startTime, long endTime) {
+    long timeTaken = endTime - startTime;
+
+    System.out.println("The calculation took " + timeTaken + "ms.");
+  }
+
+  private static List<List<Integer>> generateMatrixOne() {
+    List<List<Integer>> matrix = new ArrayList<>();
+    List<Integer> row1 = Arrays.asList(1, 2, 3);
+    List<Integer> row2 = Arrays.asList(4, 5, 6);
+    List<Integer> row3 = Arrays.asList(7, 8, 9);
+
+    matrix.add(row1);
+    matrix.add(row2);
+    matrix.add(row3);
+
+    return matrix;
+  }
+
+  private static List<List<Integer>> generateMatrixTwo() {
+    List<List<Integer>> matrix = new ArrayList<>();
+    List<Integer> row1 = Arrays.asList(9, 8, 7);
+    List<Integer> row2 = Arrays.asList(6, 15, 4);
+    List<Integer> row3 = Arrays.asList(3, 2, 1);
+
+    matrix.add(row1);
+    matrix.add(row2);
+    matrix.add(row3);
+
+    return matrix;
+  }
+
+  private static void timeAddition(int iterationLimit, String methodology) {
+    long startTime = System.currentTimeMillis();
+
+    for (int iteration = 0; iteration < iterationLimit; iteration++) {
+      switch (methodology) {
+        case "Sequentially":
+          result = new MatrixManipulator().addMatrices(matrixA, matrixB);
+          break;
+        case "Concurrently":
+          result = new ParallelMatrixManipulator().addMatrices(matrixA, matrixB);
+          break;
+      }
     }
 
-    private static void printTimeTaken(long startTime, long endTime) {
-        long timeTaken = endTime - startTime;
+    long endTime = System.currentTimeMillis();
 
-        System.out.println("The calculation took " + timeTaken + "ms.");
-    }
+    System.out.print(methodology + " " + iterationLimit + " times: ");
+    printTimeTaken(startTime, endTime);
+    printMatrix(result);
+  }
 
-    private static List<List<Integer>> generateMatrixOne() {
-        List<List<Integer>> matrix = new ArrayList<>();
-        List<Integer> row1 = Arrays.asList(1, 2, 3);
-        List<Integer> row2 = Arrays.asList(4, 5, 6);
-        List<Integer> row3 = Arrays.asList(7, 8, 9);
+  public static void main(String[] args) {
+//        int iterationLimit = 1_000;
+//
+//        // ---- Printing the Matrices
+//        printMatrix(matrixA);
+//        System.out.println("+");
+//        printMatrix(matrixB);
+//        System.out.println("=");
+//
+//        // ---- Sequentially adding the Matrices
+//        timeAddition(iterationLimit, "Sequentially");
+//
+//        // ---- Parallel adding of the Matrices
+//        timeAddition(iterationLimit, "Concurrently");
 
-        matrix.add(row1);
-        matrix.add(row2);
-        matrix.add(row3);
+    // --------------------------------------------------------------------------------------------------------
+    int iterationLimit = 1_000;
+    int matrixSize = 4;
 
-        return matrix;
-    }
+    Matrix matrixA = Matrix.randomSquareMatrix(matrixSize);
+    Matrix matrixB = Matrix.randomSquareMatrix(matrixSize);
 
-    private static List<List<Integer>> generateMatrixTwo() {
-        List<List<Integer>> matrix = new ArrayList<>();
-        List<Integer> row1 = Arrays.asList(9, 8, 7);
-        List<Integer> row2 = Arrays.asList(6, 15, 4);
-        List<Integer> row3 = Arrays.asList(3, 2, 1);
+    Matrix aPlusB = matrixA.addMatrix(matrixB);
 
-        matrix.add(row1);
-        matrix.add(row2);
-        matrix.add(row3);
-
-        return matrix;
-    }
-
-    private static void timeSequentialAddition(int iterationLimit) {
-        startTime = System.currentTimeMillis();
-
-        for (int iteration = 0; iteration < iterationLimit; iteration++) {
-            result = MatrixManipulator.addMatrices(matrixA, matrixB);
-        }
-
-        endTime = System.currentTimeMillis();
-        System.out.print("Sequentially " + iterationLimit + " times: ");
-        printTimeTaken(startTime, endTime);
-    }
-
-    private static void timeConcurrentAddition(int iterationLimit) {
-        startTime = System.currentTimeMillis();
-
-        for (int iteration = 0; iteration < iterationLimit; iteration++) {
-            result = new ParallelMatrixManipulator().addMatrices(matrixA, matrixB);
-        }
-
-        endTime = System.currentTimeMillis();
-        System.out.print("Concurrently " + iterationLimit + " times: ");
-        printTimeTaken(startTime, endTime);
-    }
-
-    public static void main(String[] args) {
-        int iterationLimit = 1_000;
-
-        // ---- Printing the Matrices
-        printMatrix(matrixA);
-        System.out.println("+");
-        printMatrix(matrixB);
-        System.out.println("=");
-        printMatrix(MatrixManipulator.addMatrices(matrixA, matrixB));
-        printMatrix(new ParallelMatrixManipulator().addMatrices(matrixA, matrixB));
-        // ---- Sequentially adding the Matrices
-        timeSequentialAddition(iterationLimit);
-
-        // ---- Parallel adding of the Matrices
-        timeConcurrentAddition(iterationLimit);
-    }
+    System.out.println(matrixA);
+    System.out.println(matrixB);
+  }
 }
