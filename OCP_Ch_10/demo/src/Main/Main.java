@@ -15,15 +15,14 @@ public class Main {
 
         switch (implementationType) {
             case "new" :
-                failedToWriteShips = SpaceshipWriter.writeShipsToFiles(TARGET_PATH_URL, spaceships, false);
+                failedToWriteShips = new SpaceshipWriter().writeShipsToFiles(TARGET_PATH_URL, spaceships, false);
                 break;
             case "old" :
-                failedToWriteShips = SpaceshipWriterOLD.writeShipsToFiles(TARGET_PATH_URL, spaceships, false);
+                failedToWriteShips = new SpaceshipWriterOLD().writeShipsToFiles(TARGET_PATH_URL, spaceships, false);
                 break;
             default :
                 System.out.println("Unrecognized implementation type.");
         }
-
 
         failedToWriteShips.forEach(shipName -> System.out.println("Failed to write ship: " + shipName));
     }

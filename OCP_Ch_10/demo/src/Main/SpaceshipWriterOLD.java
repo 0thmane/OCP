@@ -11,13 +11,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SpaceshipWriterOLD {
-    public static List<String> writeShipsToFiles(String targetURL, List<SpaceshipDto> spaceships, boolean overwrite) {
+    public List<String> writeShipsToFiles(String targetURL, List<SpaceshipDto> spaceships, boolean overwrite) {
         List<String> failedShipNames;
 
         failedShipNames = spaceships.stream()
                 .map(ship -> {
                     try {
-                        writeShipToFile(targetURL, ship, overwrite);
+                        this.writeShipToFile(targetURL, ship, overwrite);
                     } catch (IOException | FileExistsException e){
                         return ship.getName() + " " + e.getMessage();
                     } catch (Exception e) {
@@ -31,7 +31,7 @@ public class SpaceshipWriterOLD {
         return failedShipNames;
     }
 
-    public static void writeShipToFile(String targetURL, SpaceshipDto ship, boolean overwrite) throws IOException, FileExistsException {
+    public void writeShipToFile(String targetURL, SpaceshipDto ship, boolean overwrite) throws IOException, FileExistsException {
         String filename = generateShipFilename(ship);
         ensureTargetDirExists(targetURL);
 
@@ -48,7 +48,7 @@ public class SpaceshipWriterOLD {
         }
     }
 
-    private static void ensureTargetDirExists(String targetURL) throws IOException {
+    private void ensureTargetDirExists(String targetURL) throws IOException {
         File directory = new File(targetURL);
 
         if (!directory.exists()) {
@@ -56,7 +56,7 @@ public class SpaceshipWriterOLD {
         }
     }
 
-    private static byte[] generateShipByteArray(SpaceshipDto ship) {
+    private byte[] generateShipByteArray(SpaceshipDto ship) {
         StringBuilder representation = new StringBuilder();
 
         representation.append("Ship ID: " + ship.getId());
@@ -66,7 +66,7 @@ public class SpaceshipWriterOLD {
         return representation.toString().getBytes();
     }
 
-    private static String generateShipFilename(SpaceshipDto ship) {
+    private String generateShipFilename(SpaceshipDto ship) {
         StringBuilder filename = new StringBuilder();
         String fileFriendlyShipName = ship.getName().replace(" ", "");
 
