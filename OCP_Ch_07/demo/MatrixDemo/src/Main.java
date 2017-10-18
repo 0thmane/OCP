@@ -1,10 +1,9 @@
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
-    Matrix-adding algorithm implemented in parallel and sequential fashion.
+ Matrix-adding algorithm implemented in parallel and sequential fashion.
 
-    Comparing performance.
+ Comparing performance.
  **/
 
 public class Main {
@@ -77,7 +76,7 @@ public class Main {
         startTime = System.currentTimeMillis();
 
         for (int iteration = 0; iteration < iterationLimit; iteration++) {
-            result = ParallelMatrixManipulator.addMatrices(matrixA, matrixB);
+            result = new ParallelMatrixManipulator().addMatrices(matrixA, matrixB);
         }
 
         endTime = System.currentTimeMillis();
@@ -86,7 +85,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int iterationLimit = 1_000_000;
+        int iterationLimit = 1_000;
 
         // ---- Printing the Matrices
         printMatrix(matrixA);
@@ -94,7 +93,7 @@ public class Main {
         printMatrix(matrixB);
         System.out.println("=");
         printMatrix(MatrixManipulator.addMatrices(matrixA, matrixB));
-        printMatrix(ParallelMatrixManipulator.addMatrices(matrixA, matrixB));
+        printMatrix(new ParallelMatrixManipulator().addMatrices(matrixA, matrixB));
         // ---- Sequentially adding the Matrices
         timeSequentialAddition(iterationLimit);
 
