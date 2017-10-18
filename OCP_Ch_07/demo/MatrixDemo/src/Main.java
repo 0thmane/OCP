@@ -96,12 +96,11 @@ public class Main {
     int iterationLimit = 1_000;
     int matrixSize = 4;
 
-    Matrix matrixA = Matrix.randomSquareMatrix(matrixSize);
+    Matrix matrixA = Matrix.randomMatrix(matrixSize, 2);
     Matrix matrixB = Matrix.randomSquareMatrix(matrixSize);
 
-    Matrix aPlusB = matrixA.addMatrix(matrixB);
-
     System.out.println(matrixA);
-    System.out.println(matrixB);
+//    System.out.println(matrixB);
+    System.out.println(matrixA.getSize());
   }
 }
