@@ -28,6 +28,6 @@ public class Main {
     }
 
     public static void main(String[] args) throws IOException {
-        runDemo("old");
+        runDemo("new");
     }
 }

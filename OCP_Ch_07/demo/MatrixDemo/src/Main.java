@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Matrix-adding algorithm implemented in parallel and sequential fashion.
@@ -7,8 +8,10 @@ import java.util.*;
  **/
 public class Main {
 
-  private static final int ITERATION_LIMIT = 1_000;
-  private static final int SQUARE_MATRIX_SIZE = 2;
+  private static final int ITERATION_LIMIT = 1;
+  private static final int SQUARE_MATRIX_SIZE = 1;
+
+  private ExecutorService executor = Executors.newFixedThreadPool(4);
 
   private void printTimeTaken(long startTime, long endTime) {
     long timeTaken = endTime - startTime;
@@ -18,6 +21,7 @@ public class Main {
 
   private void timeAddition(String methodology, Matrix matrixA, Matrix matrixB) {
     Matrix result = null;
+
     long startTime = System.currentTimeMillis();
 
     for (int iteration = 0; iteration < ITERATION_LIMIT; iteration++) {
@@ -26,7 +30,7 @@ public class Main {
           result = matrixA.add(matrixB);
           break;
         case "Concurrently":
-          result = matrixA.addConcurrently(matrixB);
+          result = matrixA.addConcurrently(matrixB, executor);
           break;
       }
     }

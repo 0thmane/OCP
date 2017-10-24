@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 // 2D matrix
@@ -67,32 +64,30 @@ public class Matrix {
     List<List<Integer>> result = new ArrayList<>();
     List<List<Integer>> otherRawMatrix = other.getRawRepresentation();
 
-    IntStream.range(0, other.getWidth())
-      .forEach(index -> {
-        List<Integer> matrixAColumn = this.matrix.get(index);
-        List<Integer> matrixBColumn = otherRawMatrix.get(index);
+    IntStream.range(0, this.getHeight())
+      .forEach(row -> {
+        List<Integer> thisRow = this.matrix.get(row);
+        List<Integer> otherRow = otherRawMatrix.get(row);
+        List<Integer> resultingRow = addMatrixRows(thisRow, otherRow);
 
-        List<Integer> resultingRow = addMatrixColumns(matrixAColumn, matrixBColumn);
         result.add(resultingRow);
       });
 
     return Matrix.of(result);
   }
 
-  public Matrix addConcurrently(Matrix other) {
+  public Matrix addConcurrently(Matrix other, ExecutorService executor) {
     List<List<Integer>> result = new ArrayList<>();
     List<List<Integer>> otherRawMatrix = other.getRawRepresentation();
 
-    int matrixSize = other.getWidth();
+//    ExecutorService executor = Executors.newFixedThreadPool(3);
 
-    ExecutorService executor = Executors.newFixedThreadPool(3);
+    IntStream.range(0, this.getHeight())
+      .forEach(row -> {
+        List<Integer> thisRow = this.matrix.get(row);
+        List<Integer> otherRow = otherRawMatrix.get(row);
 
-    IntStream.range(0, matrixSize)
-      .forEach(index -> {
-        List<Integer> matrixAColumn = this.matrix.get(index);
-        List<Integer> matrixBColumn = otherRawMatrix.get(index);
-
-        Future<List<Integer>> futureRow = executor.submit(() -> addMatrixColumns(matrixAColumn, matrixBColumn));
+        Future<List<Integer>> futureRow = executor.submit(() -> addMatrixRows(thisRow, otherRow));
 
         try {
           result.add(futureRow.get());
@@ -101,7 +96,7 @@ public class Matrix {
         }
       });
 
-    executor.shutdown();
+//    executor.shutdown();
 
     return Matrix.of(result);
   }
@@ -121,7 +116,7 @@ public class Matrix {
     return strRepresentation.toString();
   }
 
-  private List<Integer> addMatrixColumns(List<Integer> rowA, List<Integer> rowB) {
+  private List<Integer> addMatrixRows(List<Integer> rowA, List<Integer> rowB) {
     List<Integer> resultingRow = new ArrayList<>();
 
     if (rowA.size() != rowB.size()) {
